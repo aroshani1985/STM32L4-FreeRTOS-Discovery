@@ -16,6 +16,7 @@
   *
   ******************************************************************************
   */
+#include <stdbool.h>
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -61,8 +62,16 @@ void Error_Handler(void);
 #define LEDG_GPIO_Port GPIOC
 #define LEDR_Pin GPIO_PIN_7
 #define LEDR_GPIO_Port GPIOC
+#define TAMPER_SW_Pin GPIO_PIN_11
+#define TAMPER_SW_GPIO_Port GPIOA
+#define TAMPER_SW_EXTI_IRQn EXTI15_10_IRQn
 /* USER CODE BEGIN Private defines */
+typedef struct
+{
+	uint8_t tamp_sw:1;
+}system_flags;
 
+extern system_flags sf;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

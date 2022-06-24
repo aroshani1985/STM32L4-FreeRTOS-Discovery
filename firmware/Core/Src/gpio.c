@@ -16,6 +16,7 @@
   *
   ******************************************************************************
   */
+#include <stdbool.h>
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -58,6 +59,16 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = TAMPER_SW_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(TAMPER_SW_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
 
@@ -110,6 +121,19 @@ void led_r_ctrl(uint8_t mode)
     HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, GPIO_PIN_RESET);
     break;
 
+  }
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  switch(GPIO_Pin)
+  {
+  case TAMPER_SW_Pin:
+	  sf.tamp_sw = true;
+	  break;
+
+  default:
+	  break;
   }
 }
 /* USER CODE END 2 */
