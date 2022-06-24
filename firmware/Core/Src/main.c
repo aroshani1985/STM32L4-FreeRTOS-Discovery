@@ -87,7 +87,8 @@ int main(void)
   MX_GPIO_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
-
+  led_g_ctrl(1);
+  led_r_ctrl(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -42,13 +42,74 @@
 void MX_GPIO_Init(void)
 {
 
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, LEDG_Pin|LEDR_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PCPin PCPin */
+  GPIO_InitStruct.Pin = LEDG_Pin|LEDR_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 2 */
+#define LED_G_PIN   GPIO_PIN_6
+#define LED_R_PIN   GPIO_PIN_7
 
+#define LED_G_PORT   GPIOC
+#define LED_R_PORT   GPIOC
+void led_g_ctrl(uint8_t mode)
+{
+  switch(mode)
+  {
+  case 0:
+      HAL_GPIO_WritePin(LED_G_PORT, LED_G_PIN, GPIO_PIN_RESET);
+    break;
+
+  case 1:
+      HAL_GPIO_WritePin(LED_G_PORT, LED_G_PIN, GPIO_PIN_SET);
+    break;
+
+  case 2:
+    HAL_GPIO_TogglePin(LED_G_PORT, LED_G_PIN);
+    break;
+
+  default:
+    HAL_GPIO_WritePin(LED_G_PORT, LED_G_PIN, GPIO_PIN_RESET);
+    break;
+
+  }
+}
+
+void led_r_ctrl(uint8_t mode)
+{
+  switch(mode)
+  {
+  case 0:
+      HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, GPIO_PIN_RESET);
+    break;
+
+  case 1:
+      HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, GPIO_PIN_SET);
+    break;
+
+  case 2:
+    HAL_GPIO_TogglePin(LED_R_PORT, LED_R_PIN);
+    break;
+
+  default:
+    HAL_GPIO_WritePin(LED_R_PORT, LED_R_PIN, GPIO_PIN_RESET);
+    break;
+
+  }
+}
 /* USER CODE END 2 */
