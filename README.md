@@ -6,21 +6,19 @@ STM32L431RCT6 FreeRTOS 10.4  (Hardware and Firmware)
 </p>
 
 # Project goals
-  1- Custom board to explore STM32WLE5JC SoC features\
-  2- Focused on Low power IoT LoRa and LoRaWAN applications\
-  3- Dedicated peripherals for IoT Smart Metering applications (Gas and Water Meter)
+  1- Custom board to explore STM32L431RCT6 ultra-low power MCU features\
+  2- Focused on RTOS based applications\
+  3- Dedicated peripherals for IoT low-power applications 
 
 # Hardware Features
   1- Selectable Power Source (Battery or USB) with Backup Battery with ON-OFF switch.\
-  2- All GPIO’s available through two (2x10) pin header for debugging, monitoring, or any other purposes.\
-  3- Three different antenna connector available (SMA, UFL, Hole)\
+  2- All GPIO’s available through two (2x12) pin header for debugging, monitoring, or any other purposes.\
+  3- External HSE 8 MHz, LSE 32.768 KHz\
   4- Two LED (Green and Blue) and One Small Buzzer possible to disconnect from MCU through 2mm jumper).\
   5- Config and Tamper switch (possible to disconnect from MCU through 2mm jumper).\
   6- On board USB-Serial and pin header for UART1 (possible to disconnect from MCU through 2mm jumper).\
-  7- One magnet switch in parallel with a pulse input connector (possible to disconnect from MCU through 2mm jumper).\
-  8- Tilt and Tamper switch (possible to disconnect from MCU through 2mm jumper).\
-  9- ADXL345 on I2C bus with two interrupt line (possible to disconnect from MCU through 2mm jumper).\
-  10- LM75 temperature  sensor on I2C bus with power enable switch. \
-  11- Flash memory on SPI bus with power enable switch.
+  7- One pulse input connector (possible to disconnect from MCU through 2mm jumper).\
+  8- SPI Flash Memory, I2C EEPROM with power enable pin.\
+  9- LM75 temperature  sensor on I2C bus with power enable switch.
 
  
