@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    rtc.h
+  * @file    usart.h
   * @brief   This file contains all the function prototypes for
-  *          the rtc.c file
+  *          the usart.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __RTC_H__
-#define __RTC_H__
+#ifndef __USART_H__
+#define __USART_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,22 +32,23 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern RTC_HandleTypeDef hrtc;
+extern UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN Private defines */
-extern RTC_TimeTypeDef sTime;
-extern RTC_DateTypeDef sDate;
+
 /* USER CODE END Private defines */
 
-void MX_RTC_Init(void);
+void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-void get_date_time();
+void u1_print_str(char* str);
+void u1_print_str_rtc(char* str);
+void u1_print_str_u32_rtc(char* str, uint32_t u32, uint8_t mode);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __RTC_H__ */
+#endif /* __USART_H__ */
 

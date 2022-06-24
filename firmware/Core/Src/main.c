@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "rtc.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -86,9 +87,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_RTC_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   led_g_ctrl(1);
-
+  u1_print_str_rtc("Init system done.\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -99,6 +101,7 @@ int main(void)
 	  {
 		  sf.tamp_sw = false;
 		  led_r_ctrl(2);
+		  u1_print_str_rtc("Tamper switch pressed.\n");
 	  }
     /* USER CODE END WHILE */
 
