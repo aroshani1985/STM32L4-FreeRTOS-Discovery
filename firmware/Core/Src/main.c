@@ -24,7 +24,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
+#include "task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +45,8 @@ system_flags sf;
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+TaskHandle_t xGreenLEDTask_Handle;
+TaskHandle_t xRedLEDTask_Handle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,7 +57,28 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void LED_Green_Task(void *pxParams);
+void LED_Red_Task(void *pxParams);
 
+void LED_Green_Task(void *pxParams)
+{
+	while(1)
+	{
+		 led_g_ctrl(2);
+	     u1_print_str_rtc("LED-G\n");
+	     HAL_Delay(1000);
+	}
+}
+
+void LED_Red_Task(void *pxParams)
+{
+	while(1)
+	{
+		 led_r_ctrl(2);
+		 u1_print_str_rtc("LED-R\n");
+	     HAL_Delay(500);
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -89,20 +112,15 @@ int main(void)
   MX_RTC_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  led_g_ctrl(1);
-  u1_print_str_rtc("Init system done.\n");
+  xTaskCreate(LED_Green_Task, "LED-G", 128, NULL, 1, &xGreenLEDTask_Handle);
+  xTaskCreate(LED_Red_Task, "LED-R", 128, NULL, 1, &xRedLEDTask_Handle);
+  vTaskStartScheduler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(sf.tamp_sw)
-	  {
-		  sf.tamp_sw = false;
-		  led_r_ctrl(2);
-		  u1_print_str_rtc("Tamper switch pressed.\n");
-	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
