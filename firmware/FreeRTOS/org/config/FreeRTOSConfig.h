@@ -158,7 +158,7 @@ header file. */
 #define configENFORCE_SYSTEM_CALLS_FROM_KERNEL_ONLY		1
 
 
-//#include "SEGGER_SYSVIEW_FreeRTOS.h"
+#include "SEGGER_SYSVIEW_FreeRTOS.h"
 
 #ifdef __cplusplus
 }
